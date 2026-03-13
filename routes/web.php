@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('template.index');
+});
+
+/*RUTAS PARA VISTAS AUTENTICACION*/    
+Route::get('/login', function () {
+    return view('template.auth.login');
+});
+
+/*RUTAS PARA VISTAS CLIENTES*/
+Route::get('/clients', function () {
+    return view('template.clients.index');
 });
