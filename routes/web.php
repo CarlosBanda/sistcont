@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('template.index');
-});
-
 /*RUTAS PARA VISTAS AUTENTICACION*/    
 Route::get('/login', function () {
     return view('template.auth.login');
 });
 
-/*RUTAS PARA VISTAS CLIENTES*/
-Route::get('/clients', function () {
-    return view('template.clients.index');
+Route::get('/register', function() {
+    return view('template.auth.register');
+});
+
+Route::post('/login', [AuthController::class,'login']);
+Route::post('/register', [AuthController::class, 'register']);
+
+/*RUTAS PARA VISTAS CLIENTES*/ /* RUTAS PROTEGIDAS  */
+Route::middleware('jwt.auth')->group(function() {
+    
+    Route::get('/', function () {
+        return view('template.index');
+    });
+    
+    Route::get('/clients', function () {
+        return view('template.clients.index');
+    });
+
 });

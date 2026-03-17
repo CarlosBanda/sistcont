@@ -1,74 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="stylesheet" href="{{ asset('css/login/login.css')}}">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <title>Sistcont Login</title>
 </head>
 
 <body>
 
-<h2>Login</h2>
+  <div class="container">
 
-<form id="loginForm">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Name</label>
-    <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    <div class="left">
+
+    <div class="title">SISTCONT</div>
+
+    <div class="login-card">
+
+    <h3>Login</h3>
+
+      <form id="loginForm">
+
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Email Address" required>
+        </div>
+
+        <div class="input-group password-group">
+          <input type="password" id="password" placeholder="Password" required>
+          <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+
+        <button class="btn-login" type="submit" id="loginBtn">
+          <span id="btnText">Iniciar Sesión</span>
+          <i class="fa-solid fa-spinner loader" id="loader"></i>
+        </button>
+        
+        <div class="session">
+          ¿No tienes cuenta? <a href="/register" class="register">Registrase</a>
+        </div>
+
+        <p id="error"></p>
+
+      </form>
+
+    </div>
+
   </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+
+  <div class="right">
+    <img src="{{ asset('images/login/login.jpg')}}">
   </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+
   </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-<script>
-
-document.getElementById('loginForm').addEventListener('submit', async function(e){
-
-    e.preventDefault();
-
-    const email = document.querySelector('[name=email]').value;
-    const password = document.querySelector('[name=password]').value;
-    const name = document.querySelector('[name=name]').value;
-
-    const response = await fetch('/api/register',{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-            email:email,
-            password:password,
-            name:name
-        })
-    });
-
-    const data = await response.json();
-
-    if(data.token){
-
-        localStorage.setItem('token',data.token);
-
-        window.location = "/dashboard";
-
-    }else{
-
-        alert("Credenciales incorrectas");
-
-    }
-
-});
-
-</script>
 
 </body>
+  <script src="{{ asset('js/login.js') }}"></script>
 </html>

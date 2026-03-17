@@ -38,14 +38,16 @@
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="images/faces/face5.jpg" alt="profile"/>
-              <span class="nav-profile-name">Eugenia Mullins</span>
+              @if($user)
+                <span class="nav-profile-name">{{$user->name}}</span>
+              @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
                 <i class="typcn typcn-cog-outline text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" onclick="logout()">
                 <i class="typcn typcn-eject text-primary"></i>
                 Logout
               </a>
@@ -226,6 +228,8 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('js/dashboard.js') }}"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/inactivity.js"></script>
   <!-- End custom js for this page-->
 </body>
 
