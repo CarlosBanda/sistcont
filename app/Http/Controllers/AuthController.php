@@ -33,15 +33,17 @@ class AuthController extends Controller
 
         $credentials = $request->only('email','password');
 
-        if (!$token = auth()->attempt($credentials)) {
+        if (!$token = auth('api')->attempt($credentials)) {
             return response()->json([
                 'error' => 'Credenciales incorrectas'
             ],401);
         }
 
+        $cookie = cookie('token', $token, 60, '/', null, false, true);
+
         return response()->json([
-            'token' => $token
-        ]);
+            'success' => true
+        ])->withCookie($cookie);
     }
 
     public function me()
@@ -51,8 +53,13 @@ class AuthController extends Controller
 
     public function logout()
     {
-        auth()->logout();
-        return response()->json(['message' => 'Sesión cerrada']);
+        return response()->json([
+            'message' => 'Logout'
+            ])->cookie(
+                'token',
+                '',
+                -1
+            );
     }
 
 }
