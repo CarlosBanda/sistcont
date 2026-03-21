@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,3 +28,6 @@ Route::middleware('auth:api')->group(function(){
     Route::post('logout',[AuthController::class,'logout']);
 
 });
+
+// Rutas para clientes
+Route::post('create-clients', [ClientController::class, 'create']);

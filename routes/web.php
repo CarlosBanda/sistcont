@@ -25,4 +25,8 @@ Route::get('/login', function () {
 /*RUTAS PARA VISTAS CLIENTES*/
 Route::get('/clients', function () {
     return view('template.clients.index');
-});
+})->name('clients');
+
+Route::get('/create-clients', function () {
+    return view('template.clients.create-clients');
+})->name('create-clients');

@@ -67,8 +67,8 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Todos los Clientes</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Crear clientes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('clients') }}">Todos los Clientes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create-clients') }}">Crear clientes</a></li>
               </ul>
             </div>
           </li>
