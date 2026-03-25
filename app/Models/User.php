@@ -23,6 +23,13 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+
+    public function company()
+    {
+        return $this->hasOne(Company::class, 'user_id');
+    }
+    
+
     /**
      * The attributes that are mass assignable.
      *

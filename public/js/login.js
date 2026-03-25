@@ -28,16 +28,14 @@ form.addEventListener('submit', async function(e){
   loader.classList.add("active");
   btnText.style.display="none";
 
-  let response=await fetch('/login',{
+  let response = await fetch('/api/login',{
     method:'POST',
-    credentials:'include',
     headers:{
     'Content-Type':'application/json',
-    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     },
     body:JSON.stringify({
-    email:email,
-    password:password
+      email:email,
+      password:password
     })
   });
 
@@ -45,6 +43,11 @@ form.addEventListener('submit', async function(e){
   btnText.style.display = "inline";
 
   if(response.ok){
+
+    let data = await response.json();
+
+    localStorage.setItem('token', data.token);
+
     Swal.fire({
       icon:'success',
       title:'Bienvenido',

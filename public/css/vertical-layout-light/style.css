@@ -8717,6 +8717,7 @@ body {
   color: #001737;
   text-align: left;
   background-color: #fff;
+  display: none;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {

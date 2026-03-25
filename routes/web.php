@@ -23,18 +23,21 @@ Route::get('/register', function() {
     return view('template.auth.register');
 });
 
-Route::post('/login', [AuthController::class,'login']);
-Route::post('/register', [AuthController::class, 'register']);
+// Route::post('/login', [AuthController::class,'login']);
+// Route::post('/register', [AuthController::class, 'register']);
 
-/*RUTAS PARA VISTAS CLIENTES*/ /* RUTAS PROTEGIDAS  */
-Route::middleware('jwt.auth')->group(function() {
+// Route::middleware('jwt.auth')->group(function() {
     
-    Route::get('/', function () {
-        return view('template.index');
-    });
-    
-    Route::get('/clients', function () {
-        return view('template.clients.index');
-    });
-
+Route::get('/', function () {
+    return view('template.index');
 });
+
+Route::get('/clients', function () {
+    return view('template.clients.index');
+});
+
+Route::get('/products', function (){
+    return view('template.products.index');
+});
+
+// });

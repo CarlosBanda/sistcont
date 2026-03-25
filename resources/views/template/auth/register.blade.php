@@ -22,26 +22,63 @@
 
                     <div class="login-card">
 
-                         <h3>Crear cuenta</h3>
-
                          <form id="registerForm">
 
-                              <div class="input-group">
-                                   <input type="text" id="name" placeholder="Nombre" required>
-                              </div>
+                              <h3>Crear cuenta</h3>
 
-                              <div class="input-group">
-                                   <input type="email" id="email" placeholder="Email" required>
-                              </div>
+                              <div class="form-container">
+                                   <div id="step1" class="step show">
+                                        <div class="input-group">
+                                             <input type="text" id="nameCompany" placeholder="Nombre" required>
+                                        </div>
 
-                              <div class="input-group password-group">
-                                   <input type="password" id="password" placeholder="Password" required>
-                                   <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
-                              </div>
+                                        <div class="input-group">
+                                             <input type="text" id="razonSocial" placeholder="Razón Social" required>
+                                        </div>
 
-                              <button class="btn-login" type="submit">
-                                   Registrarse
-                              </button>
+                                        <div class="input-group password-group">
+                                             <input type="text" id="phoneCompany" placeholder="Teléfeno" required>
+                                        </div>
+
+                                        <div class="input-group password-group">
+                                             <input type="email" id="emailCompany" placeholder="Email" required>
+                                        </div>
+
+                                        <div class="input-group">
+                                             <textarea id="addressCompany" placeholder="Dirección"></textarea>
+                                        </div>
+
+                                        <button class="btn-login" type="button" id="buttonStep1">
+                                             Continuar
+                                        </button>
+                                   </div>
+
+                                   <div id="step2" class="step hidden-left">
+                                        <div class="input-group">
+                                             <input type="text" id="name" placeholder="Nombre" required>
+                                        </div>
+
+                                        <div class="input-group">
+                                             <input type="email" id="email" placeholder="Email" required>
+                                        </div>
+
+                                        <div class="input-group password-group">
+                                             <input type="password" id="password" placeholder="Password" required>
+                                             <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+                                        </div>
+
+                                        <div class="btn-accion">
+                                             <button type="button" id="backStep" class="btn-login">
+                                                  Regresar
+                                             </button>
+
+                                             <button class="btn-login" type="submit">
+                                                  Registrarse
+                                             </button>
+                                        </div>
+
+                                   </div>
+                              </div>
 
                               <div class="session">
                                    ¿Ya tienes cuenta? 

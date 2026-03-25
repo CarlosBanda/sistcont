@@ -1,6 +1,7 @@
 let timeout;
 
-const tiempoInactividad = 10 * 60 * 1000;
+const tiempoInactividad = 3 * 60 * 1000;
+// const tiempoInactividad = 10000; 10 segundos
 
 function resetTimer(){
 
@@ -14,10 +15,15 @@ function resetTimer(){
 
 function logoutAutomatico(){
 
+    const token = localStorage.getItem('token');
+
     fetch('/api/logout',{
         method:'POST',
-        credentials:'include'
+        headers:{
+            Authorization: 'Bearer ' + token
+        }
     });
+    localStorage.removeItem('token');
 
     Swal.fire({
         icon:'warning',
