@@ -1,7 +1,7 @@
 let timeout;
 
-const tiempoInactividad = 3 * 60 * 1000;
-// const tiempoInactividad = 10000; 10 segundos
+const tiempoInactividad = 10 * 60 * 1000;
+// const tiempoInactividad = 10000; para hacerr prueba de funcionalidad 10 segundos
 
 function resetTimer(){
 

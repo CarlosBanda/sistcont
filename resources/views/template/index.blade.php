@@ -68,8 +68,8 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Todos los Clientes</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Crear clientes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('clients') }}">Todos los Clientes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create-clients') }}">Crear clientes</a></li>
               </ul>
             </div>
           </li>
@@ -96,8 +96,9 @@
             </a>
             <div class="collapse" id="ui-basic-products">
               <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create-products')}}">Agregar productos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('products')}}">Todos los productos</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Inventario</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ url('/products')}}">Agregar productos</a></li>
               </ul>
             </div>
           </li>
@@ -212,6 +213,7 @@
   </div>
   <!-- container-scroller -->
 
+  @yield('script');
   <!-- base:js -->
   <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
   <!-- endinject -->
@@ -227,6 +229,7 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('js/dashboard.js') }}"></script>
+  <script src="/js/addProduct.js"></script>
   <script src="/js/api.js"></script>
   <script src="/js/inactivity.js"></script>
   <script>checkAuth();</script>
@@ -237,7 +240,7 @@
       }
     })
   </script>
-  <!-- End custom js for this page-->
+  @yield('scripts')
 </body>
 
 </html>

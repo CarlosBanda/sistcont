@@ -17,27 +17,30 @@ use App\Http\Controllers\AuthController;
 /*RUTAS PARA VISTAS AUTENTICACION*/    
 Route::get('/login', function () {
     return view('template.auth.login');
-});
+})->name('login');
+
+/*RUTAS PARA VISTAS CLIENTES*/
+Route::get('/clients', function () {
+    return view('template.clients.index');
+})->name('clients');
+
+Route::get('/create-clients', function () {
+    return view('template.clients.create-clients');
+})->name('create-clients');
 
 Route::get('/register', function() {
     return view('template.auth.register');
-});
+})->name('register');
 
-// Route::post('/login', [AuthController::class,'login']);
-// Route::post('/register', [AuthController::class, 'register']);
-
-// Route::middleware('jwt.auth')->group(function() {
-    
 Route::get('/', function () {
     return view('template.index');
 });
 
-Route::get('/clients', function () {
-    return view('template.clients.index');
-});
-
 Route::get('/products', function (){
     return view('template.products.index');
-});
+})->name('products');
 
-// });
+Route::get('/create-products', function () {
+    return view('template.products.create-products');
+})->name('create-products');
+

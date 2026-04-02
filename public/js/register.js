@@ -62,13 +62,12 @@ form.addEventListener("submit", async function(e){
      let email = document.getElementById("email").value;
      let password = document.getElementById("password").value;
 
-     let response = await fetch("/register",{
-
+     let response = await fetch("/api/register",{
+     
      method:"POST",
 
      headers:{
-          "Content-Type":"application/json",
-          "X-CSRF-TOKEN":document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+          "Content-Type":"application/json"
      },
 
      body:JSON.stringify({
@@ -91,8 +90,8 @@ form.addEventListener("submit", async function(e){
      if(response.ok){
 
           Swal.fire({
-          icon:'success',
-          title:'Cuenta creada'
+               icon:'success',
+               title:'Cuenta creada'
           });
 
           setTimeout(()=>{
@@ -102,8 +101,8 @@ form.addEventListener("submit", async function(e){
      }else{
 
           Swal.fire({
-          icon:'error',
-          title:'Error al registrar'
+               icon:'error',
+               title:'Error al registrar'
           });
 
      }

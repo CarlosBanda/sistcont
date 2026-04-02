@@ -24,10 +24,9 @@
 
                          <form id="registerForm">
 
-                              <h3>Crear cuenta</h3>
-
                               <div class="form-container">
                                    <div id="step1" class="step show">
+                                        <h3>Crear Empresa</h3>
                                         <div class="input-group">
                                              <input type="text" id="nameCompany" placeholder="Nombre" required>
                                         </div>
@@ -54,6 +53,7 @@
                                    </div>
 
                                    <div id="step2" class="step hidden-left">
+                                        <h3>Crear Usuario</h3>
                                         <div class="input-group">
                                              <input type="text" id="name" placeholder="Nombre" required>
                                         </div>
@@ -82,7 +82,7 @@
 
                               <div class="session">
                                    ¿Ya tienes cuenta? 
-                                   <a href="/login" class="register">Iniciar sesión</a>
+                                   <a href="{{ route('login')}}" class="register">Iniciar sesión</a>
                               </div>
 
                          </form>
