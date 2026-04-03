@@ -20,13 +20,11 @@ Route::get('/login', function () {
 });
 
 /*RUTAS PARA VISTAS CLIENTES*/
-Route::get('/clients', function () {
+/*Route::get('/clients', function () {
     return view('template.clients.index');
-})->name('clients');
+})->name('clients');*/
 
-Route::get('/create-clients', function () {
-    return view('template.clients.create-clients');
-})->name('create-clients');
+
 Route::get('/register', function() {
     return view('template.auth.register');
 });
@@ -43,6 +41,15 @@ Route::middleware('jwt.auth')->group(function() {
     
     Route::get('/clients', function () {
         return view('template.clients.index');
-    });
+    })->name('clients');;
+
+    Route::get('/create-clients', function () {
+        return view('template.clients.create-clients');
+    })->name('create-clients');
+
+
+    Route::get('/create-sales', function () {
+        return view('template.sales.create-sale');
+    })->name('create-sales');
 
 });
