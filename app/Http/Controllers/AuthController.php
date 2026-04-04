@@ -6,26 +6,52 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
 
     public function register(Request $request)
     {
-        dump($request->all());
-        printf('Registrando usuario: %s', $request->email);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        DB::beginTransaction();
+        // print_r($request->user);
+        // return $request->all();
+        
+        try {
+            // crear user
+            $user = User::create([
+                'name' => $request->user['name'],
+                'email' => $request->user['email'],
+                'password' => Hash::make($request->user['password']),
+            ]);
 
-        $token = auth()->login($user);
+            // crear company
+            $company = $user->company()->create([
+                'name' => $request->company['nameCompany'],
+                'razon_social' => $request->company['razonSocial'],
+                'phone' => $request->company['phoneCompany'],
+                'email' => $request->company['emailCompany'],
+                'address' => $request->company['addressCompany'],
+            ]);
 
-        return response()->json([
-            'user' => $user,
-            'token' => $token
-        ]);
+            DB::commit();
+
+            $token = auth('api')->login($user);
+
+            return response()->json([
+                'user' => $user,
+                'token' => $token
+            ]);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return response()->json([
+                'error' => 'Error al registrarse',
+                'message' => $th->getMessage()
+            ], 500);
+        }
+
     }
 
     public function login(Request $request)
@@ -39,11 +65,9 @@ class AuthController extends Controller
             ],401);
         }
 
-        $cookie = cookie('token', $token, 60, '/', null, false, true);
-
         return response()->json([
-            'success' => true
-        ])->withCookie($cookie);
+            'token' => $token
+        ]);
     }
 
     public function me()

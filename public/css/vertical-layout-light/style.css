@@ -8717,6 +8717,12 @@ body {
   color: #001737;
   text-align: left;
   background-color: #fff;
+  display: none;
+}
+
+.padding{
+  padding: 20px 10px;
+  
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {

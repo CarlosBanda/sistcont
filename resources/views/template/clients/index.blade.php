@@ -13,11 +13,19 @@
                         <tr>
                           <th>Nombre</th>
                           <th>Direccion</th>
-                          <th>Created</th>
-                          <th>Status</th>
+                          <th>Telefono</th>
+                          <th>RFC</th>
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($clientes as $cliente)
+                          <tr>
+                            <td>{{$cliente->name}}</td>
+                            <td>{{$cliente->address}}</td>
+                            <td>{{$cliente->phone}}</td>
+                            <td>{{$cliente->rfc}}</td>
+                          </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>

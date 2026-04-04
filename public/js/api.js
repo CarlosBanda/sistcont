@@ -1,18 +1,21 @@
 function apiFetch(url, options = {}) {
 
+    const token = localStorage.getItem('token');
+
     options.headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        ...(token && { Authorization: 'Bearer ' + token } ),
         ...options.headers
     };
 
     return fetch('/api/' + url,{
-        ...options,
-        credentials: 'include'
+        ...options
     })
     .then(response => {
 
             if(response.status === 401){
+                localStorage.removeItem('token');
                 window.location.href = "/login";
                 return;
             }
@@ -21,12 +24,43 @@ function apiFetch(url, options = {}) {
         });
 }
 
+function checkAuth() {
+    const token =localStorage.getItem('token');
+
+    if(!token){
+        window.location.href = '/login';
+        return;
+    }
+
+    fetch('/api/me', {
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    })
+    .then(res => {
+        if(res.status === 401){
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+        } else {
+            document.body.style.display = "block";
+        }
+    })
+    .catch(() => {
+        window.location.href = '/login';
+    })
+}
+
 function logout(){
+
+    const token = localStorage.getItem('token');
 
     fetch('/api/logout',{
         method:'POST',
-        credentials: 'include'
+        headers:{
+            Authorization: 'Bearer ' + token
+        }
     });
 
+    localStorage.removeItem('token');
     window.location.href="/login";
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Http\Controllers\AuthController;
 /*RUTAS PARA VISTAS AUTENTICACION*/    
 Route::get('/login', function () {
     return view('template.auth.login');
-});
+})->name('login');
 
 /*RUTAS PARA VISTAS CLIENTES*/
 /*Route::get('/clients', function () {
@@ -25,12 +26,24 @@ Route::get('/login', function () {
 })->name('clients');*/
 
 
+<<<<<<< HEAD
+=======
+Route::get('/create-clients', function () {
+    return view('template.clients.create-clients');
+})->name('create-clients');
+
+>>>>>>> LR-Login
 Route::get('/register', function() {
     return view('template.auth.register');
+})->name('register');
+
+Route::get('/', function () {
+    return view('template.index');
 });
 
-Route::post('/login', [AuthController::class,'login']);
-Route::post('/register', [AuthController::class, 'register']);
+Route::get('/products', function (){
+    return view('template.products.index');
+})->name('products');
 
 /*RUTAS PARA VISTAS CLIENTES*/ /* RUTAS PROTEGIDAS  */
 Route::middleware('jwt.auth')->group(function() {
@@ -39,6 +52,7 @@ Route::middleware('jwt.auth')->group(function() {
         return view('template.index');
     });
     
+<<<<<<< HEAD
     Route::get('/clients', function () {
         return view('template.clients.index');
     })->name('clients');;
@@ -51,5 +65,13 @@ Route::middleware('jwt.auth')->group(function() {
     Route::get('/create-sales', function () {
         return view('template.sales.create-sale');
     })->name('create-sales');
+=======
+    Route::get('/clients', [ClientController::class, 'getClients'])->name('clients');; // ✅ correcta
+>>>>>>> LR-Login
+
+    Route::get('/create-clients', function () {
+        return view('template.clients.create-clients');
+    })->name('create-clients');
+
 
 });

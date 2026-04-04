@@ -41,7 +41,7 @@
         </button>
         
         <div class="session">
-          ¿No tienes cuenta? <a href="/register" class="register">Registrase</a>
+          ¿No tienes cuenta? <a href="{{ route('register')}}" class="register">Registrase</a>
         </div>
 
         <p id="error"></p>
@@ -57,7 +57,7 @@
   </div>
 
   </div>
-
+  
 </body>
   <script src="{{ asset('js/login.js') }}"></script>
 </html>

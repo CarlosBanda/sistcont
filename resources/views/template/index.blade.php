@@ -18,6 +18,7 @@
   <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
 </head>
 <body>
   
@@ -38,9 +39,7 @@
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="images/faces/face5.jpg" alt="profile"/>
-              @if($user)
-                <span class="nav-profile-name">{{$user->name}}</span>
-              @endif
+                <span class="nav-profile-name" id="userName"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -97,8 +96,9 @@
             </a>
             <div class="collapse" id="ui-basic-products">
               <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create-products')}}">Agregar productos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('products')}}">Todos los productos</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Inventario</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Agregar productos</a></li>
               </ul>
             </div>
           </li>
@@ -213,6 +213,7 @@
   </div>
   <!-- container-scroller -->
 
+  @yield('script');
   <!-- base:js -->
   <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
   <!-- endinject -->
@@ -228,10 +229,18 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('js/dashboard.js') }}"></script>
+  <script src="/js/addProduct.js"></script>
   <script src="/js/api.js"></script>
   <script src="/js/inactivity.js"></script>
-  <!-- End custom js for this page-->
+  <script>checkAuth();</script>
+  <script>
+    apiFetch('me').then(user => {
+      if(user){
+        document.getElementById('userName').textContent = user.name;
+      }
+    })
+  </script>
+  @yield('scripts')
 </body>
-
 </html>
 

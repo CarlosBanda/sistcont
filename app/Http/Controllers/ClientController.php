@@ -35,10 +35,8 @@ class ClientController extends Controller
 
     public function getClients()
     {
-        $clients = Cliente::all();
-        return response()->json([
-            'clients' => $clients
-        ]);
+        $clientes = Cliente::all(); // obtiene todos los registros
+        return view('template.clients.index', compact('clientes'));
     }
 
 }
