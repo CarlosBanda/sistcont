@@ -26,16 +26,10 @@ Route::get('/login', function () {
 })->name('clients');*/
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/Entrega-LR
 Route::get('/create-clients', function () {
     return view('template.clients.create-clients');
 })->name('create-clients');
 
->>>>>>> LR-Login
 Route::get('/register', function() {
     return view('template.auth.register');
 })->name('register');
@@ -55,7 +49,7 @@ Route::middleware('jwt.auth')->group(function() {
         return view('template.index');
     });
     
-<<<<<<< HEAD
+
     Route::get('/clients', function () {
         return view('template.clients.index');
     })->name('clients');;
@@ -65,14 +59,11 @@ Route::middleware('jwt.auth')->group(function() {
     })->name('create-clients');
 
 
-<<<<<<< HEAD
     Route::get('/create-sales', function () {
         return view('template.sales.create-sale');
     })->name('create-sales');
-=======
     Route::get('/clients', [ClientController::class, 'getClients'])->name('clients');; // ✅ correcta
->>>>>>> LR-Login
-=======
+
 /*RUTAS PARA VISTAS CLIENTES*/ /* RUTAS PROTEGIDAS  */
 Route::middleware('jwt.auth')->group(function() {
     
@@ -83,16 +74,14 @@ Route::middleware('jwt.auth')->group(function() {
     Route::get('/clients', function () {
         return view('template.clients.index');
     })->name('clients');;
->>>>>>> origin/Entrega-LR
+
 
     Route::get('/create-clients', function () {
         return view('template.clients.create-clients');
     })->name('create-clients');
 
 
-<<<<<<< HEAD
 });
-=======
     Route::get('/create-sales', function () {
         return view('template.sales.create-sale');
     })->name('create-sales');
@@ -104,4 +93,3 @@ Route::middleware('jwt.auth')->group(function() {
 
 
 });
->>>>>>> origin/Entrega-LR
