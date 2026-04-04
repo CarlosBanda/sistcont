@@ -44,3 +44,4 @@ Route::get('/create-products', function () {
     return view('template.products.create-products');
 })->name('create-products');
 
+

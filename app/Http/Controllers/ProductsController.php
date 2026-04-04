@@ -8,7 +8,6 @@ class ProductsController extends Controller
 {
     public function create(Request $request){
         // return $request->all();
-
         $product = Product::create([
             'name' => $request-> product_name,
             'category' => $request-> product_category,

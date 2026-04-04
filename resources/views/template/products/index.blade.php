@@ -35,9 +35,7 @@
         <div class="modal-header">
           <h5 class="modal-title">Detalle del producto</h5>
         </div>
-        <div class="modal-body" id="modalBody">
-          
-        </div>
+        <div class="modal-body" id="modalBody"></div>
       </div>
     </div>
   </div>

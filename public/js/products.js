@@ -19,7 +19,6 @@ apiFetch('products').then(data => {
            `;
             tbody.innerHTML += row;
      });
-
 });
 
 function verProducto(product){

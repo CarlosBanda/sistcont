@@ -13,7 +13,6 @@ form.addEventListener("submit", async function(e) {
      let product_unit = document.getElementById("product_unit").value;
 
      // console.log(product_category);
-
      let response = await apiFetch('create-products',{
           method: 'POST',
           body:JSON.stringify({

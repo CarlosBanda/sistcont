@@ -33,7 +33,6 @@ function logoutAutomatico(){
     }).then(()=>{
         window.location.href="/login";
     });
-
 }
 
 document.addEventListener('mousemove', resetTimer);
