@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +41,18 @@ Route::get('/products', function (){
     return view('template.products.index');
 })->name('products');
 
-Route::get('/create-products', function () {
-    return view('template.products.create-products');
-})->name('create-products');
+/*RUTAS PARA VISTAS CLIENTES*/ /* RUTAS PROTEGIDAS  */
+Route::middleware('jwt.auth')->group(function() {
+    
+    Route::get('/', function () {
+        return view('template.index');
+    });
+    
+    Route::get('/clients', [ClientController::class, 'getClients'])->name('clients');; // ✅ correcta
+
+    Route::get('/create-clients', function () {
+        return view('template.clients.create-clients');
+    })->name('create-clients');
 
 
+});
