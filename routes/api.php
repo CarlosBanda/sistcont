@@ -31,6 +31,3 @@ Route::middleware('jwt.auth')->group(function(){
     Route::get('products', [ProductsController::class, 'getProducts']);
     Route::post('create-clients', [ClientController::class, 'create']);
 });
-
-
-

@@ -24,6 +24,7 @@
                             <td>{{$cliente->address}}</td>
                             <td>{{$cliente->phone}}</td>
                             <td>{{$cliente->rfc}}</td>
+                            <td><button id="{{$cliente->id}}" type="button" class="btn btn-success">Info</button></td>
                           </tr>
                         @endforeach
                       </tbody>
