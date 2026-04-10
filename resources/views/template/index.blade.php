@@ -82,7 +82,9 @@
             </a>
             <div class="collapse" id="ui-basic-ventas">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Comprobantes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Cotizacion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create-venta')}}">Nota de Venta</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Facturacion</a></li>
               </ul>
             </div>
           </li>

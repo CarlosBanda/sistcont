@@ -42,3 +42,7 @@ Route::get('/products', function (){
 Route::get('/create-products', function () {
     return view('template.products.create-products');
 })->name('create-products');
+
+Route::get('/venta', function () {
+    return view('template.sales.create-sale');
+})->name('create-venta');
