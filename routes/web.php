@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CLientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,11 @@ Route::get('/login', function () {
 })->name('login');
 
 
-Route::get("/clients", [CLientController::class, 'getClients'])->name('clients');
+// Route::get("/clients", [CLientController::class, 'getClients'])->name('clients');
+
+Route::get('/clients', function (){
+    return view('template.clients.index');
+})->name('clients');
 
 Route::get('/create-clients', function () {
     return view('template.clients.create-clients');
@@ -46,3 +50,7 @@ Route::get('/create-products', function () {
 Route::get('/venta', function () {
     return view('template.sales.create-sale');
 })->name('create-venta');
+
+Route::get('/cotizacion', function () {
+    return view('template.sales.quotation');
+})->name('quotation');

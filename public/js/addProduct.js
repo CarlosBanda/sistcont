@@ -27,7 +27,7 @@ form.addEventListener("submit", async function(e) {
           })
      });
 
-     if(response.ok){
+     if(response){
           Swal.fire({
                icon:'success',
                title:'Producto creada'

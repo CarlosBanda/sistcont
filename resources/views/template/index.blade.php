@@ -82,7 +82,7 @@
             </a>
             <div class="collapse" id="ui-basic-ventas">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">Cotizacion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('quotation')}}">Cotizacion</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('create-venta')}}">Nota de Venta</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Facturacion</a></li>
               </ul>
@@ -214,9 +214,11 @@
   </div>
   <!-- container-scroller -->
 
-  @yield('script');
+  {{-- @yield('script'); --}}
   <!-- base:js -->
   <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
@@ -233,6 +235,8 @@
   <script src="/js/addProduct.js"></script>
   <script src="/js/api.js"></script>
   <script src="/js/inactivity.js"></script>
+  <script src="/js/quotations.js"></script>
+  <script src="/js/addQuotation.js"></script>
   <script>checkAuth();</script>
   <script>
     apiFetch('me').then(user => {

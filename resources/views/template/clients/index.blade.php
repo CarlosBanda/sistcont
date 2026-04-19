@@ -18,7 +18,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($clientes as $cliente)
+                        {{-- @foreach($clientes as $cliente)
                           <tr>
                             <td>{{$cliente->name}}</td>
                             <td>{{$cliente->address}}</td>
@@ -26,11 +26,14 @@
                             <td>{{$cliente->rfc}}</td>
                             <td><button id="{{$cliente->id}}" type="button" class="btn btn-success">Info</button></td>
                           </tr>
-                        @endforeach
+                        @endforeach --}}
                       </tbody>
                     </table>
                   </div>
                 </div>
           </div>
         </div>
+@endsection
+@section('scripts')
+     <script src="{{ asset('js/clients.js') }}"></script>
 @endsection

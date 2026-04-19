@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\SalesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,4 +31,7 @@ Route::middleware('jwt.auth')->group(function(){
     Route::post('create-products',[ProductsController::class, 'create']);
     Route::get('products', [ProductsController::class, 'getProducts']);
     Route::post('create-clients', [ClientController::class, 'create']);
+    Route::get('clients', [ClientController::class, 'getClients']);
+    Route::get('next-folio', [SalesController::class, 'getNextFolio']);
+    Route::post('create-quotation',[SalesController::class, 'create']);
 });
