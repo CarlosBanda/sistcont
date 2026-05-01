@@ -7,22 +7,37 @@ use App\Models\Quotation;
 use App\Models\Cliente;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Folio;
+use App\Models\Company;
 
 class SalesController extends Controller
 {
 
-    public function getNextFolio() //pinche banda si preguntas esta madre genera el folio  que pediste
+    public function getNextFolio(Request $request) //pinche banda si preguntas esta madre genera el folio  que pediste
     {
-        $last = Quotation::latest()->first();
+
+        $type = $request->type;
+
+        $company = Company::where('user_id', auth()->id())->first();
+        $companyName = $company->name;
+
+        $companyPrefix = strtoupper(substr($companyName, 0, 2));
+
+
+        $last = Folio::where('folio_type',$type)
+            ->where('company_id', $company->id)
+            ->latest()
+            ->first();
 
         if(!$last){
             $number = 1;
         } else {
-            $lastNumber = (int) str_replace('COT-', '', $last->folio);
+            $parts = explode('-', $last->folio);
+            $lastNumber = (int) end($parts);
             $number = $lastNumber + 1;
         }
 
-        $folio = 'COT-' . str_pad($number, 3, '0', STR_PAD_LEFT);
+        $folio = $companyPrefix . '-' . $type . '-' . str_pad($number, 3, '0', STR_PAD_LEFT);
 
         return response()->json([
             'folio' => $folio
@@ -40,19 +55,40 @@ class SalesController extends Controller
     }
 
     public function create(Request $request){
-        // return $request;
+
+        $userId = auth()->id();
+
+        $company = Company::where('user_id', $userId)->first();
+        $prefix = strtoupper(substr($company->name, 0, 2));
+        $type = 'COT';
+
+        $last = Folio::where('folio_type', $type)
+            ->where('company_id', $company->id)
+            ->latest()
+            ->first();
+
+        $number = $last ? ((int) explode('-', $last->folio)[2] +1) : 1;
+        
+        $folioText = $prefix . '-' . $type . '-' . str_pad($number, 3, '0', STR_PAD_LEFT);
+
+        $folio =  Folio::create([
+            'user_id' => $userId,
+            'company_id' => $company->id,
+            'folio_type' => $type,
+            'folio' => $folioText
+        ]);
+
         $quotation = Quotation::create([
-            'serie' => $request-> serie,
-            'user_id' => auth()->id(),
             'client_id' => $request->client_id,
             'contact_name' => $request->contact_name,
-            'folio' => $request->folio,
             'quotation_date' => $request->quotation_date,
+            'folio_id' => $folio->id,
             'currency' => $request-> currency
         ]);
 
         return response()->json([
-            'quotation' => $quotation
+            'quotation' => $quotation,
+            'folio' => $folioText
         ]);
     }
 }

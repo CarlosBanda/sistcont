@@ -8720,6 +8720,21 @@ body {
   display: none;
 }
 
+.btn-gradient {
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    border: none;
+    color: white;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    opacity: 0.9;
+}
+
 .padding{
   padding: 20px 10px;
   

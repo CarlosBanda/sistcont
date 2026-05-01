@@ -2,8 +2,8 @@ const formQuotation = document.getElementById("save-quotation");
 
 formQuotation.addEventListener("submit", async function(e){
      e.preventDefault();
-     let serie = document.getElementById("serie").value;
-     let folio = document.getElementById("folio").value;
+
+     // let folio = document.getElementById("folio").value;
      let client_id = document.getElementById("client_id").value;
      let contact_name = document.getElementById("contact_name").value;
      let quotation_date = document.getElementById("quotation_date").value;
@@ -12,8 +12,7 @@ formQuotation.addEventListener("submit", async function(e){
      let response = await apiFetch('create-quotation',{
           method: 'POST',
           body:JSON.stringify({
-               serie:serie,
-               folio:folio,
+               // folio:folio,
                client_id:client_id,
                contact_name:contact_name,
                quotation_date:quotation_date,
