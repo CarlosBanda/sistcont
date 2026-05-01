@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Quotation;
+use App\Models\Cliente;
+use App\Models\User;
+use App\Models\Product;
 
 class SalesController extends Controller
 {
@@ -24,6 +27,16 @@ class SalesController extends Controller
         return response()->json([
             'folio' => $folio
         ]);
+    }
+
+    public function index(){
+        $clientes = Cliente::all(); // obtiene todos los registros
+        $users = User::all(); // obtiene todos los registros
+        $productos = Product::all(); // obtiene todos los registros
+
+        //return response()->json($data);
+        return view('template.sales.create-sale', compact('clientes', 'users', 'productos'));
+
     }
 
     public function create(Request $request){

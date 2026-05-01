@@ -31,4 +31,18 @@ class ProductsController extends Controller
         $products = Product::where('user_id', auth()->id())->get();
         return response()->json($products);
     }
+
+    public function buscarProducto(Request $request)
+    {
+        $texto = $request->texto;
+
+        $productos = DB::table('products')
+            ->where('name', 'like', "%$texto%")
+            ->orWhere('code', 'like', "%$texto%")
+            ->where('description', 'Activo')
+            ->limit(10)
+            ->get();
+
+        return response()->json($productos);
+    }
 }

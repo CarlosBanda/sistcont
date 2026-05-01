@@ -19,7 +19,10 @@
           <label>Cliente</label>
           <div class="d-flex">
             <select class="form-control me-2">
-              <option>Genérico Nacional</option>
+              <option value="">Seleccionar cliente</option>
+              @foreach($clientes as $cliente)
+                <option value="{{ $cliente->id }}">{{ $cliente->name }}</option>
+              @endforeach
             </select>
             <a href="#" class="btn btn-link">Ver perfil</a>
           </div>
@@ -42,7 +45,12 @@
 
         <div class="form-group">
           <label>Vendedor</label>
-          <input type="text" class="form-control" readonly>
+          <select class="form-control me-2">
+              <option value="">Seleccionar vendedor</option>
+              @foreach($users as $user)
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
+              @endforeach
+            </select>
         </div>
 
       </div>
