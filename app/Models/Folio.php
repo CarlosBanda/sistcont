@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Quotation extends Model
+class Folio extends Model
 {
     use HasFactory;
-    protected $table = 'quotations';
     protected $fillable = [
-        'client_id',
-        'contact_name',
-        'quotation_date',
-        'folio_id',
-        'currency'
+        'folio',
+        'folio_type',
+        'user_id',
+        'company_id'
     ];
 }

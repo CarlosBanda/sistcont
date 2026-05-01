@@ -9,17 +9,23 @@
 
           <!-- aquí van los campos -->
           <div class="row">
-               <div class="col-md-6">
+               {{-- <div class="col-md-6">
                <div class="form-group">
                     <label>Serie</label>
                     <input type="text" id="serie" name="serie" class="form-control">
                </div>
-               </div>
+               </div> --}}
 
                <div class="col-md-6">
                <div class="form-group">
                     <label>Folio</label>
                     <input type="text" id="folio" name="folio" class="form-control" readonly>
+                    <div class="mt-3">
+                         <button type="button" class="btn btn-gradient mt-2 fw-semibold" onclick="generateFolio('COT')">
+                             <i class="bi bi-file-earmark-text"></i>
+                              Generar Folio
+                         </button>
+                    </div>
                </div>
                </div>
           </div>

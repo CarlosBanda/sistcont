@@ -25,15 +25,23 @@ function loadUser(){
      });
 }
 
-function loadFolio(){
-     apiFetch('next-folio').then(data => {
-          let input = document.getElementById('folio');
-          input.value = data.folio;  
+function generateFolio(type){
+     apiFetch(`next-folio?type=${type}`)
+     .then(data => {
+          document.getElementById('folio').value = data.folio;
+     })
+     .catch(err => {
+          console.error(err);
+          Swal.fire({
+               icon: "error",
+               title: "Error al generar el folio"
+          });
      });
 }
+
 
 document.addEventListener('DOMContentLoaded', ()=> {
      loadClients();
      loadUser();
-     loadFolio();
+     // generateFolio();
 })
