@@ -54,6 +54,10 @@
                                                        </div>
                                                   </div>
                                              </div>
+                                             <div class="form-group">
+                                                  <label>Cantidad</label>
+                                                  <input id="cantidad" name="cantidad" class="form-control"></input>
+                                             </div>
                                         </div>
                                    </div>
                               </div>
@@ -117,7 +121,6 @@
                                                        </div>
                                                   </div>
                                              </div>
-                                             
                                         </div>
                                    </div>
                               </div>

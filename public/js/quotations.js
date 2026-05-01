@@ -17,12 +17,24 @@ function loadClients() {
      });
 }
 
-function loadUser(){
-     apiFetch('me').then(data => {
-          let input = document.getElementById('user_name');
-          input.value = data.name;
-          
-     });
+async function loadUsers() {
+    let users = await apiFetch('users');
+
+    let select = document.getElementById("user_id");
+    select.innerHTML = '';
+
+    users.forEach(user => {
+        let option = document.createElement("option");
+        option.value = user.id;
+        option.textContent = user.name;
+        select.appendChild(option);
+    });
+}
+
+async function loadUser(){
+     let data = await apiFetch('me');
+     let select = document.getElementById('user_id');
+     select.value = data.id;
 }
 
 function generateFolio(type){
@@ -40,8 +52,9 @@ function generateFolio(type){
 }
 
 
-document.addEventListener('DOMContentLoaded', ()=> {
+document.addEventListener('DOMContentLoaded', async ()=> {
      loadClients();
-     loadUser();
+     await loadUser();
+     await loadUsers();
      // generateFolio();
 })
