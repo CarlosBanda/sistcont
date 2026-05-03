@@ -43,7 +43,7 @@
 
           <div class="form-group">
                <label>Responsable de la cotización</label>
-               <input type="text" id="user_name" name="user_name" class="form-control" readonly>
+               <select id="user_id" name="user_id" class="form-control"></select>
           </div>
 
           <div class="row">

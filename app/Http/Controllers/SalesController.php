@@ -56,7 +56,7 @@ class SalesController extends Controller
 
     public function create(Request $request){
 
-        $userId = auth()->id();
+        $userId = $request->user_id;
 
         $company = Company::where('user_id', $userId)->first();
         $prefix = strtoupper(substr($company->name, 0, 2));

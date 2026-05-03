@@ -11,6 +11,7 @@ form.addEventListener("submit", async function(e) {
      let product_description = document.getElementById("product_description").value;
      let product_sat = document.getElementById("product_sat").value;
      let product_unit = document.getElementById("product_unit").value;
+     let cantidad = document.getElementById("cantidad").value;
 
      // console.log(product_category);
      let response = await apiFetch('create-products',{
@@ -23,7 +24,8 @@ form.addEventListener("submit", async function(e) {
                product_bar:product_bar,
                product_description:product_description,
                product_sat:product_sat,
-               product_unit:product_unit
+               product_unit:product_unit,
+               cantidad:cantidad
           })
      });
 

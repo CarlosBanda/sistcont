@@ -17,7 +17,7 @@ class ProductsController extends Controller
             'description' => $request -> product_description,
             'sat_key' => $request -> product_sat,
             'sat_unit' => $request -> product_unit,
-            'stock'=> 0,
+            'stock'=> $request->cantidad,
             'user_id' => auth()->id()
         ]);
 

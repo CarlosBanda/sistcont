@@ -8,11 +8,12 @@ formQuotation.addEventListener("submit", async function(e){
      let contact_name = document.getElementById("contact_name").value;
      let quotation_date = document.getElementById("quotation_date").value;
      let currency = document.getElementById("currency").value;
+     let user_id = document.getElementById("user_id").value;
 
      let response = await apiFetch('create-quotation',{
           method: 'POST',
           body:JSON.stringify({
-               // folio:folio,
+               user_id:user_id,
                client_id:client_id,
                contact_name:contact_name,
                quotation_date:quotation_date,
