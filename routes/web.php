@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\PosController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +57,8 @@ Route::get("/venta", [SalesController::class, 'index'])->name('create-venta');
 Route::get('/cotizacion', function () {
     return view('template.sales.quotation');
 })->name('quotation');
+
+
+//BUSCAR PRODUCTOS
+Route::get('/pos', [PosController::class, 'index']);
+Route::get('/buscar-producto', [PosController::class, 'buscar']);

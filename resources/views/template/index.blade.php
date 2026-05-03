@@ -234,11 +234,14 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('js/dashboard.js') }}"></script>
-  <script src="/js/addProduct.js"></script>
+  if(document.querySelector('selector')){
+    <script src="/js/addProduct.js"></script>
+    <script src="/js/addQuotation.js"></script>
+   // código
+}
   <script src="/js/api.js"></script>
   <script src="/js/inactivity.js"></script>
   <script src="/js/quotations.js"></script>
-  <script src="/js/addQuotation.js"></script>
   <script>checkAuth();</script>
   <script>
     apiFetch('me').then(user => {
