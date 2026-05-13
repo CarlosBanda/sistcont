@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\ProviderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,5 +35,6 @@ Route::middleware('jwt.auth')->group(function(){
     Route::get('clients', [ClientController::class, 'getClients']);
     Route::get('next-folio', [SalesController::class, 'getNextFolio']);
     Route::post('create-quotation',[SalesController::class, 'create']);
+    Route::post('create-provider',[ProviderController::class, 'create']);
     Route::get('users', [AuthController::class, 'getUsers']);
 });

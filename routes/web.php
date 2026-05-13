@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\ProviderController;
 
 
 /*
@@ -62,3 +63,10 @@ Route::get('/cotizacion', function () {
 //BUSCAR PRODUCTOS
 Route::get('/pos', [PosController::class, 'index']);
 Route::get('/buscar-producto', [PosController::class, 'buscar']);
+
+// Providers
+Route::get('/providers', function (){
+    return view('template.providers.index');
+})->name('providers');
+
+Route::post('/leer-pdf', [ProviderController::class, 'leerPdf']);
