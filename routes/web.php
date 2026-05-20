@@ -51,6 +51,18 @@ Route::get('/venta', function () {
     return view('template.sales.create-sale');
 })->name('create-venta');
 
-Route::get('/cotizacion', function () {
+Route::get('/crear-cotizacion', function () {
     return view('template.sales.quotation');
+})->name('create-quotation');
+
+Route::get('/cotizacion', function () {
+    return view('template.sales.viewQuotation');
 })->name('quotation');
+
+Route::get('/crear-usuario', function() {
+    return view('template.users.create-users');
+})->name('create-users');
+
+Route::get('/users', function(){
+    return view('template.users.index');
+})->name('users');

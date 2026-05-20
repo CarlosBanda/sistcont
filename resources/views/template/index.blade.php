@@ -84,7 +84,8 @@
             </a>
             <div class="collapse" id="ui-basic-ventas">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('quotation')}}">Cotizacion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create-quotation')}}">Crear Cotizacion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('quotation')}}">Ver Cotizacion</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('create-venta')}}">Nota de Venta</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Facturacion</a></li>
               </ul>
@@ -102,6 +103,20 @@
                 <li class="nav-item"> <a class="nav-link" href="{{ route('create-products')}}">Agregar productos</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('products')}}">Todos los productos</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Inventario</a></li>
+              </ul>
+            </div>
+          </li>
+
+           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic-users" aria-expanded="false" aria-controls="ui-basic">
+              <i class="typcn typcn-rss-outline menu-icon"></i>
+              <span class="menu-title">Usuarios</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic-users">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('users')}}">Usuarios</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create-users')}}">Crear Usuario</a></li>
               </ul>
             </div>
           </li>
@@ -234,11 +249,15 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('js/dashboard.js') }}"></script>
-  <script src="/js/addProduct.js"></script>
+  {{-- <script src="/js/addProduct.js"></script> --}}
   <script src="/js/api.js"></script>
   <script src="/js/inactivity.js"></script>
-  <script src="/js/quotations.js"></script>
-  <script src="/js/addQuotation.js"></script>
+  {{-- <script src="/js/quotations.js"></script> --}}
+  {{-- <script src="/js/addQuotation.js"></script> --}}
+  {{-- <script src="/js/clientPostalCode.js"></script> --}}
+  {{-- <script src="/js/addClients.js"></script> --}}
+  {{-- <script src="/js/quotations-list.js"></script> --}}
+  {{-- <script src="/js/addUsers.js"></script> --}}
   <script>checkAuth();</script>
   <script>
     apiFetch('me').then(user => {

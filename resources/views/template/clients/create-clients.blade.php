@@ -150,88 +150,93 @@
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function () {
+// document.addEventListener("DOMContentLoaded", function () {
 
-    const input = document.querySelector("#cp_input");
+//     const input = document.querySelector("#cp_input");
 
-    input.addEventListener("input", async function () {
+//     input.addEventListener("input", async function () {
 
-        if (this.value.length === 5) {
+//         if (this.value.length === 5) {
 
-            const url = `https://api.copomex.com/query/info_cp/${this.value}?token=46556d12-eb2c-4cf1-acf6-0a2576978306`;
+//             const url = `https://api.copomex.com/query/info_cp/${this.value}?token=46556d12-eb2c-4cf1-acf6-0a2576978306`;
 
-            const response = await fetch(url);
-            const data = await response.json();
+//             const response = await fetch(url);
+//             const data = await response.json();
 
-            const select = document.getElementById("colonia_input");
-            data.forEach(item => {
+//             const select = document.getElementById("colonia_input");
+//             data.forEach(item => {
 
-                const asentamiento = item.response.asentamiento;
+//                 const asentamiento = item.response.asentamiento;
 
-                const option = document.createElement("option");
+//                 const option = document.createElement("option");
 
-                document.getElementById("state_input").value = data[0].response.estado;
-                document.getElementById("city_input").value = data[0].response.ciudad;
-                document.getElementById("country_input").value = data[0].response.pais;
-                option.value = asentamiento;
-                option.textContent = asentamiento;
+//                 document.getElementById("state_input").value = data[0].response.estado;
+//                 document.getElementById("city_input").value = data[0].response.ciudad;
+//                 document.getElementById("country_input").value = data[0].response.pais;
+//                 option.value = asentamiento;
+//                 option.textContent = asentamiento;
 
-                select.appendChild(option);
+//                 select.appendChild(option);
 
-            });
+//             });
 
-            console.log(data);
+//             console.log(data);
 
-        }
+//         }
 
-    });
+//     });
 
-});
+// });
 
-document.getElementById("save-client").addEventListener("submit", async function(e){
+// document.getElementById("save-client").addEventListener("submit", async function(e){
 
-    e.preventDefault();
+//     e.preventDefault();
 
-    const form = this;
-    const formData = new FormData(form);
+//     const form = this;
+//     const formData = new FormData(form);
 
-    // validar campos vacíos
-    for (let [name, value] of formData.entries()) {
+//     // validar campos vacíos
+//     for (let [name, value] of formData.entries()) {
 
-        if (!value.trim()) {
-            alert("El campo " + name + " está vacío");
-            return;
-        }
+//         if (!value.trim()) {
+//             alert("El campo " + name + " está vacío");
+//             return;
+//         }
 
-    }
+//     }
 
-    try {
+//     try {
 
-        const response = await fetch("/api/create-clients", {
-            method: "POST",
-            body: formData
-        });
+//         const response = await fetch("/api/create-clients", {
+//             method: "POST",
+//             body: formData
+//         });
 
-        const data = await response.json();
+//         const data = await response.json();
 
-        console.log(data);
+//         console.log(data);
 
-        alert("Cliente creado correctamente");
+//         alert("Cliente creado correctamente");
 
-        form.reset();
+//         form.reset();
 
-    } catch (error) {
+//     } catch (error) {
 
-        console.error(error);
-        alert("Error al guardar");
+//         console.error(error);
+//         alert("Error al guardar");
 
-    }
+//     }
 
-});
+// });
 
 
 
 
 
 </script>
+@endsection
+
+@section('scripts')
+     <script src="{{ asset('js/clientPostalCode.js') }}"></script>
+     <script src="{{ asset('js/addClients.js') }}"></script>
 @endsection

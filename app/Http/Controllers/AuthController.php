@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -26,12 +27,17 @@ class AuthController extends Controller
             ]);
 
             // crear company
-            $company = $user->company()->create([
+            $company = Company::create([
                 'name' => $request->company['nameCompany'],
                 'razon_social' => $request->company['razonSocial'],
                 'phone' => $request->company['phoneCompany'],
                 'email' => $request->company['emailCompany'],
                 'address' => $request->company['addressCompany'],
+                'user_id' => $user->id
+            ]);
+
+            $user->update([
+                'company_id' => $company->id
             ]);
 
             DB::commit();
@@ -77,7 +83,11 @@ class AuthController extends Controller
     }
 
     public function getUsers(){
-        return User::select('id','name')->get();
+        $company = Company::where('user_id',auth()->id())->first();
+
+        $users = User::select('id','name')->where('company_id', $company->id)->get();
+        return response()->json($users);
+        // return User::select('id','name')->get();
     }
 
     public function logout()
@@ -89,6 +99,18 @@ class AuthController extends Controller
                 '',
                 -1
             );
+    }
+
+    public function create(Request $request){
+        // return auth()->user()->company_id;
+        $user = User::create([
+            'name' => $request->nameUser,
+            'email' => $request->emailUser,
+            'password' => Hash::make($request->passwordUser),
+            'company_id' => auth()->user()->company_id
+        ]);
+
+        return response()->json($user);
     }
 
 }

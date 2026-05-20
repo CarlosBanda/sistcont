@@ -35,4 +35,6 @@ Route::middleware('jwt.auth')->group(function(){
     Route::get('next-folio', [SalesController::class, 'getNextFolio']);
     Route::post('create-quotation',[SalesController::class, 'create']);
     Route::get('users', [AuthController::class, 'getUsers']);
+    Route::post('create-users', [AuthController::class, 'create']);
+    Route::get('quotations', [SalesController::class, 'getQuotations']);
 });

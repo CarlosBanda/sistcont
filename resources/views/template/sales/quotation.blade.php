@@ -7,14 +7,7 @@
 
         <form id="save-quotation">
 
-          <!-- aquí van los campos -->
           <div class="row">
-               {{-- <div class="col-md-6">
-               <div class="form-group">
-                    <label>Serie</label>
-                    <input type="text" id="serie" name="serie" class="form-control">
-               </div>
-               </div> --}}
 
                <div class="col-md-6">
                <div class="form-group">
@@ -58,10 +51,72 @@
                     <div class="form-group">
                          <label>Moneda</label>
                          <select id="currency" name="currency" class="form-control">
-                         <option value="MXN">MXN</option>
-                         <option value="USD">USD</option>
+                         <option value="MXN">MXN - Peso mexicano</option>
+                         <option value="USD">USD - Dólar estadounidense</option>
                          </select>
                     </div>    
+               </div>
+
+               <div class="table-responsive mt-4">
+                    <table class="table table-bordered align-middle text-center">
+                         <thead class="table-light">
+                              <tr>
+                              <th>#</th>
+                              <th>Producto</th>
+                              <th>Descripción</th>
+                              <th>Cant</th>
+                              <th>Valor Unitario</th>
+                              <th>% Desc.</th>
+                              <th>Impuesto IVA</th>
+                              <th>Valor Total</th>
+                              <th></th>
+                              </tr>
+                         </thead>
+
+                         <tbody id="products-table">
+                              <tr>
+                              <td>1</td>
+
+                              <td style="position: relative;">
+                              <input type="text" class="form-control search-product" placeholder="Buscar">
+                                   <div class="dropdown-products"></div>
+                              </td>
+
+                              <td>
+                              <input type="text" class="form-control desc">
+                              </td>
+
+                              <td>
+                              <input type="number" class="form-control qty" value="1">
+                              </td>
+
+                              <td>
+                              <input type="number" class="form-control price" value="0.00">
+                              </td>
+
+                              <td>
+                              <input type="number" class="form-control discount" value="0">
+                              </td>
+
+                              <td>
+                                   <select class="form-control tax-rate">
+                                        <option value="0">Sin IVA</option>
+                                        <option value="0.16">IVA %16</option>
+                                        <option value="0.18">IVA %18</option>
+                                   </select>
+                              </td>
+
+                              <td>
+                              <input type="number" class="form-control total" value="0.00" readonly>
+                              </td>
+
+                              <td>
+                              <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                              </td>
+
+                              </tr>
+                         </tbody>
+                    </table>
                </div>
 
                <div class="mt-3 text-end">
@@ -77,3 +132,7 @@
     </div>
 @endsection
 
+@section('scripts')
+     <script src="{{ asset('js/quotations.js') }}"></script>
+     <script src="{{ asset('js/addQuotation.js') }}"></script>
+@endsection
