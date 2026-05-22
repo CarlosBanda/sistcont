@@ -65,8 +65,8 @@ Route::get('/pos', [PosController::class, 'index']);
 Route::get('/buscar-producto', [PosController::class, 'buscar']);
 
 // Providers
-Route::get('/providers', function (){
-    return view('template.providers.index');
-})->name('providers');
+
+Route::get("/providers", [ProviderController::class, 'index'])->name('providers');
+
 
 Route::post('/leer-pdf', [ProviderController::class, 'leerPdf']);

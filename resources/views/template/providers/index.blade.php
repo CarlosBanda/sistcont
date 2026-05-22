@@ -169,18 +169,23 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>address</th>
-                        <th>Telefono</th>
+                        <th>Nombre Comercial</th>
                         <th>RFC</th>
+                        <th>address</th>
+                        <th>Estatus</th>
+                        <th>Informacion</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {{-- @foreach()
+                    @foreach($providers as $provider)
                         <tr>
-                        
+                            <td>{{ $provider->name_comercial }}</td>
+                            <td>{{ $provider->rfc }}</td>
+                            <td>{{ $provider->address }}</td>
+                            <td>{{ $provider->status }}</td>
+                            <td><button id="{{$provider->id}}" class="btn btn-info">Info</button></td>
                         </tr>
-                    @endforeach  --}}
+                    @endforeach 
                     </tbody>
                 </table>
             </div>
