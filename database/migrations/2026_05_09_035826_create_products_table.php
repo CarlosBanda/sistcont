@@ -19,7 +19,11 @@ return new class extends Migration
 
             $table->string('nombre');
 
-            $table->unsignedBigInteger('unidad_medida_id')->nullable();
+            $table->unsignedBigInteger('unidad_medida_id')
+                  ->nullable()
+                  ->constrained()
+                  ->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
         });

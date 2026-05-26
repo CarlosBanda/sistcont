@@ -37,4 +37,6 @@ Route::middleware('jwt.auth')->group(function(){
     Route::post('create-quotation',[SalesController::class, 'create']);
     Route::post('create-provider',[ProviderController::class, 'create']);
     Route::get('users', [AuthController::class, 'getUsers']);
+    Route::post('create-users', [AuthController::class, 'create']);
+    Route::get('quotations', [SalesController::class, 'getQuotations']);
 });

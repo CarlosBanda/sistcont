@@ -15,6 +15,7 @@ class Product extends Model
         'modelo',
         'nombre',
         'unidad_medida_id',
+        'user_id'
     ];
 
     /*

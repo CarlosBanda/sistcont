@@ -10,6 +10,30 @@ formQuotation.addEventListener("submit", async function(e){
      let currency = document.getElementById("currency").value;
      let user_id = document.getElementById("user_id").value;
 
+     let rows = document.querySelectorAll('#products-table tr');
+     let products = [];
+
+     rows.forEach(row => {
+          let productId = row.dataset.productId;
+
+          if(!productId) return;
+
+          let qty = row.querySelector('.qty').value;
+          let price = row.querySelector('.price').value;
+          let discount = row.querySelector('.discount').value;
+          let tax = row.querySelector('.tax-rate').value;
+          let total = row.querySelector('.total').value;
+
+          products.push({
+               product_id: productId,
+               qty: qty,
+               price: price,
+               discount: discount,
+               tax: tax,
+               total: total
+          });
+     });
+
      let response = await apiFetch('create-quotation',{
           method: 'POST',
           body:JSON.stringify({
@@ -17,9 +41,12 @@ formQuotation.addEventListener("submit", async function(e){
                client_id:client_id,
                contact_name:contact_name,
                quotation_date:quotation_date,
-               currency:currency
+               currency:currency,
+               products: products
           })
      });
+     console.log("RESPONSE",response);
+     
 
      if(response){
           Swal.fire({

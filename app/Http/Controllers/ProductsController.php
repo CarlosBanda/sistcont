@@ -2,33 +2,40 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
     public function create(Request $request){
+
         // return $request->all();
         $product = Product::create([
-            'name' => $request-> product_name,
-            'category' => $request-> product_category,
-            'code' => $request -> product_code,
-            'price' => $request -> product_price,
-            'barcode' => $request -> product_bar,
-            'description' => $request -> product_description,
-            'sat_key' => $request -> product_sat,
-            'sat_unit' => $request -> product_unit,
-            'stock'=> $request->cantidad,
+            'modelo' => $request->product_model,
+            'nombre' => $request->product_name,
+            'unidad_medida_id' => $request->product_unit,
             'user_id' => auth()->id()
         ]);
 
+        foreach ($request->prices as $price) {
+            $productPrices = ProductPrice::create([
+                'product_id' => $product->id,
+                'tipo_precio' => $price['type'],
+                'precio' => $price['price'],
+            ]);
+        };
+
         return response()->json([
-            'product' => $product
+            'product' => $product,
+            'productPrices' => $productPrices
         ]);
     }
 
     public function getProducts(Request $request){
         // $prodcut = Product::all();
-        $products = Product::where('user_id', auth()->id())->get();
+        $products = Product::with('prices')
+                ->where('user_id', auth()->id())
+                ->get();
         return response()->json($products);
     }
 

@@ -1,31 +1,66 @@
 const form = document.getElementById("save-product");
+let priceIndex = 0;
+
+document.getElementById('add-price').addEventListener('click', function () {
+
+    let container = document.getElementById('prices-container');
+
+    let html = `
+        <div class="price-item mb-2">
+            <div class="row">
+                <div class="col-md-5">
+                    <input type="text" class="form-control price-type" placeholder="Mayoreo">
+                </div>
+                <div class="col-md-5">
+                    <input type="number" class="form-control price-value" placeholder="Precio">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger btn-sm remove-price">X</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    container.insertAdjacentHTML('beforeend', html);
+});
+
+
+document.addEventListener('click', function(e){
+    if(e.target.classList.contains('remove-price')){
+        e.target.closest('.price-item').remove();
+    }
+});
+
 
 form.addEventListener("submit", async function(e) {
      e.preventDefault();
 
-     let product_category = document.getElementById("product_category").value;
-     let product_code = document.getElementById("product_code").value;
+     let product_model = document.getElementById("product_model").value;
      let product_name = document.getElementById("product_name").value;
-     let product_price = document.getElementById("product_price").value;
-     let product_bar = document.getElementById("product_bar").value;
-     let product_description = document.getElementById("product_description").value;
-     let product_sat = document.getElementById("product_sat").value;
      let product_unit = document.getElementById("product_unit").value;
-     let cantidad = document.getElementById("cantidad").value;
+     let prices = [];
 
-     // console.log(product_category);
+    document.querySelectorAll('.price-item').forEach(item=>{
+        let type = item.querySelector('.price-type').value;
+        let value = item.querySelector('.price-value').value;
+
+        if(type && value){
+            prices.push({
+                type:type,
+                price: value
+            });
+        }
+    });
+
+    // console.log("PRICE", prices);
+
      let response = await apiFetch('create-products',{
           method: 'POST',
           body:JSON.stringify({
-               product_category:product_category,
-               product_code:product_code,
+               product_model:product_model,
                product_name:product_name,
-               product_price:product_price,
-               product_bar:product_bar,
-               product_description:product_description,
-               product_sat:product_sat,
                product_unit:product_unit,
-               cantidad:cantidad
+               prices:prices
           })
      });
 
@@ -35,9 +70,9 @@ form.addEventListener("submit", async function(e) {
                title:'Producto creada'
           });
           
-          setTimeout(()=>{
-               window.location.reload();
-          }, 1500);
+        setTimeout(()=>{
+             window.location.reload();
+        }, 1500);
      } else{
           Swal.fire({
                icon:'error',
@@ -46,4 +81,4 @@ form.addEventListener("submit", async function(e) {
      }
      
      
-})
+});

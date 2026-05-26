@@ -6,15 +6,14 @@
   <div class="content-wrapper padding">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title text-nowrap">Productos</h4>
+        <h4 class="card-title text-nowrap">Usuarios</h4>
         <div class="table-responsive ">
           <table class="table table-striped table-bordered table-hover align-middle">
             <thead>
               <tr>
-                <th class="text-nowrap">Modelo</th>
-                <th>Nombre</th>
-                <th>Tipo Precio</th>
-                <th>Precio</th>
+                <th class="text-nowrap">Nombre</th>
+                <th>Apellidos</th>
+                <th >Email</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -25,19 +24,15 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="modalProducto">
+  {{-- <div class="modal fade" id="modalProducto">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Detalle del producto</h5>
+          <h5 class="modal-title">Detalles del usuario</h5>
         </div>
         <div class="modal-body" id="modalBody"></div>
       </div>
     </div>
-  </div>
+  </div> --}}
 </div>
-@endsection
-
-@section('scripts')
-     <script src="{{ asset('js/products.js') }}"></script>
 @endsection

@@ -9,11 +9,12 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Folio;
 use App\Models\Company;
+use App\Models\QuotationItem;
 
 class SalesController extends Controller
 {
 
-    public function getNextFolio(Request $request) //pinche banda si preguntas esta madre genera el folio  que pediste
+    public function getNextFolio(Request $request)
     {
 
         $type = $request->type;
@@ -79,6 +80,7 @@ class SalesController extends Controller
         ]);
 
         $quotation = Quotation::create([
+            'company_id' => $company->id,
             'client_id' => $request->client_id,
             'contact_name' => $request->contact_name,
             'quotation_date' => $request->quotation_date,
@@ -86,9 +88,32 @@ class SalesController extends Controller
             'currency' => $request-> currency
         ]);
 
+        foreach ($request->products as $item) {
+            $quotationItem = QuotationItem::create([
+                'quotation_id' => $quotation->id,
+                'product_id' => $item['product_id'],
+                'qty' => $item['qty'],
+                'price' => $item['price'],
+                'discount' => $item['discount'],
+                'tax' => $item['tax'],
+                'total' => $item['total']
+            ]);
+        }
+
         return response()->json([
             'quotation' => $quotation,
-            'folio' => $folioText
+            'folio' => $folioText,
+            'quotationItem' => $quotationItem
         ]);
     }
+
+    public function getQuotations(){
+        $company = Company::where('user_id',auth()->id())->first();
+
+        $quotations = Quotation::with(['client','folio'])
+            ->where('company_id', $company->id)
+            ->get();
+        return response()->json($quotations);
+    }
+
 }
