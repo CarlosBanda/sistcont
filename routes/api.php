@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\InventoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,4 +40,5 @@ Route::middleware('jwt.auth')->group(function(){
     Route::get('users', [AuthController::class, 'getUsers']);
     Route::post('create-users', [AuthController::class, 'create']);
     Route::get('quotations', [SalesController::class, 'getQuotations']);
+    Route::post('add-product-inventory', [InventoryController::class, 'store']);
 });

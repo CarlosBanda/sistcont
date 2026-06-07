@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProviderController;
 
 
@@ -83,3 +84,6 @@ Route::get('/crear-usuario', function() {
 Route::get('/users', function(){
     return view('template.users.index');
 })->name('users');
+
+
+Route::get("/inventory", [InventoryController::class, 'index'])->name('inventario');

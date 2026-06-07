@@ -16,7 +16,7 @@ class Inventory extends Model
         'numero_serie',
         'codigo_barras',
         'garantia',
-        'cantidad',
+        'estatus'
     ];
 
     /*
@@ -28,5 +28,11 @@ class Inventory extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function availableInventories()
+    {
+        return $this->hasMany(Inventory::class)
+            ->where('estatus', 'disponible');
     }
 }

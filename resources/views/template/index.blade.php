@@ -103,7 +103,7 @@
                 <li class="nav-item"> <a class="nav-link" href="{{ route('create-products')}}">Agregar productos</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('products')}}">Todos los productos</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('providers')}}">Proveedores</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Inventario</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('inventario')}}">Inventario</a></li>
               </ul>
             </div>
           </li>
