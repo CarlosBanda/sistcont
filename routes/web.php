@@ -87,3 +87,5 @@ Route::get('/users', function(){
 
 
 Route::get("/inventory", [InventoryController::class, 'index'])->name('inventario');
+
+Route::get('/sales/quotationPDF/{id}', [SalesController::class, 'generatePDF']);

@@ -64,6 +64,7 @@
                               <th>#</th>
                               <th>Producto</th>
                               <th>Descripción</th>
+                              <th>Código de barra</th>
                               <th>Cant</th>
                               <th>Valor Unitario</th>
                               <th>% Desc.</th>
@@ -83,19 +84,23 @@
                               </td>
 
                               <td>
-                              <input type="text" class="form-control desc">
+                                   <input type="text" class="form-control desc">
                               </td>
 
                               <td>
-                              <input type="number" class="form-control qty" value="1">
+                                   <input type="text" class="form-control barcode" readonly></input>
                               </td>
 
                               <td>
-                              <input type="number" class="form-control price" value="0.00">
+                                   <input type="number" class="form-control qty" value="1">
                               </td>
 
                               <td>
-                              <input type="number" class="form-control discount" value="0">
+                                   <input type="number" class="form-control price" value="0.00">
+                              </td>
+
+                              <td>
+                                   <input type="number" class="form-control discount" value="0">
                               </td>
 
                               <td>
@@ -107,11 +112,11 @@
                               </td>
 
                               <td>
-                              <input type="number" class="form-control total" value="0.00" readonly>
+                                   <input type="number" class="form-control total" value="0.00" readonly>
                               </td>
 
                               <td>
-                              <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                   <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                               </td>
 
                               </tr>
@@ -119,11 +124,42 @@
                     </table>
                </div>
 
+               <div class="row mt-4 justify-content-end">
+                    <div class="col-md-4">
+
+                         <div class="mb-2">
+                              <label>Subtotal</label>
+                              <input type="number" id="subtotal" class="form-control" readonly>
+                         </div>
+
+                         <div class="mb-2">
+                              <label>Descuento</label>
+                              <input type="number" id="discount_total" class="form-control" readonly>
+                         </div>
+
+                         <div class="mb-2">
+                              <label>IVA</label>
+                              <input type="number" id="tax_total" class="form-control" readonly>
+                         </div>
+
+                         <div class="mb-2">
+                              <label>Total</label>
+                              <input type="number" id="grand_total" class="form-control fw-bold" readonly>
+                         </div>
+
+                    </div>
+               </div>
+
                <div class="mt-3 text-end">
                     <button type="submit" class="btn btn-primary">
                          Guardar cotización
                     </button>
                </div>
+
+               <button type="button" id="btn-pdf" class="btn btn-danger mt-3" style="display: none;"> 
+               {{-- <button type="button" id="btn-pdf" class="btn btn-danger mt-3"> --}}
+                    Generar PDF
+               </button>
           </div>
 
         </form>

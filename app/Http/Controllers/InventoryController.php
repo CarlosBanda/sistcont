@@ -27,6 +27,8 @@ class InventoryController extends Controller
 
     public function store(StoreInventoryRequest $request)
     {
+        // print_r($request->product_id);
+        // return $request->all();
         try {
 
             DB::beginTransaction();

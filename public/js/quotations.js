@@ -1,6 +1,6 @@
 
 let productsList = [];
-
+let quotationId = null;
 
 function loadClients() {
     apiFetch('clients').then(data => {
@@ -100,33 +100,101 @@ function addNewRow(){
     let row = `
         <tr>
             <td>${index}</td>
+
             <td style="position:relative;">
                 <input type="text" class="form-control search-product" placeholder="Buscar">
                 <div class="dropdown-products"></div>
             </td>
+
             <td><input type="text" class="form-control desc"></td>
+
+            <td>
+                <input type="text" class="form-control barcode" readonly>
+            </td>
+
             <td><input type="number" class="form-control qty" value="1"></td>
+
             <td><input type="number" class="form-control price" value="0.00"></td>
+
             <td><input type="number" class="form-control discount" value="0"></td>
-            <td><select class="form-control tax-rate"><option value="0">Sin IVA</option><option value="0.16">IVA %16</option><option value="0.18">IVA %18</option></select></td>
+
+            <td>
+                <select class="form-control tax-rate">
+                    <option value="0">Sin IVA</option>
+                    <option value="0.16">IVA %16</option>
+                    <option value="0.18">IVA %18</option>
+                </select>
+            </td>
+
             <td><input type="number" class="form-control total" value="0.00" readonly></td>
-            <td><button class="btn btn-danger btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
+
+            <td>
+                <button type="button" class="btn btn-danger btn-sm delete-row">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
         </tr>
     `;
 
     table.insertAdjacentHTML('beforeend', row);
 }
 
+function calcularTotalesgenerales(){
+    let rows = document.querySelectorAll('#products-table tr');
+
+    let subtotal = 0;
+    let descuento = 0;
+    let iva = 0;
+    let total = 0;
+
+    rows.forEach(row => {
+        let qty = parseFloat(row.querySelector('.qty')?.value) || 0;
+        let price = parseFloat(row.querySelector('.price')?.value) || 0;
+        let discountPercent = parseFloat(row.querySelector('.discount')?.value) || 0;
+        let taxRate = parseFloat(row.querySelector('.tax-rate')?.value) || 0;
+
+        let sub = qty * price;
+        let descAmount = sub * (discountPercent / 100);
+        let base = sub - descAmount;
+        let taxAmount = base * taxRate;
+        let tot  = base + taxAmount;
+
+        subtotal += sub;
+        descuento += descAmount;
+        iva += taxAmount;
+        total += tot;
+    });
+    document.getElementById('subtotal').value = subtotal.toFixed(2);
+    document.getElementById('discount_total').value = descuento.toFixed(2);
+    document.getElementById('tax_total').value = iva.toFixed(2);
+    document.getElementById('grand_total').value = total.toFixed(2);
+}
+
 document.addEventListener('click', function(e){
     if(e.target.classList.contains('item-product')){
         let productId = e.target.dataset.id;
+
         let product = productsList.find(p => p.id == productId);
+        // console.log("product",product);
+        // console.log("inventories",product.inventories);
 
         let row = e.target.closest('tr');
 
-        row.querySelector('.search-product').value = product.name;
-        row.querySelector('.desc').value = product.description || '';
-        row.querySelector('.price').value = product.price || 0;
+        row.querySelector('.search-product').value = product.nombre;
+        row.querySelector('.desc').value = product.modelo || '';
+
+        let price = 0;
+        if(product.prices && product.prices.length > 0){
+            price = product.prices[0].precio;
+        }
+        row.querySelector('.price').value = price;
+
+        let barcodes = '';
+        if(product.inventories && product.inventories.length > 0){
+            barcodes = product.inventories[0].codigo_barras;
+        }
+        row.querySelector('.barcode').value = barcodes;
+
         row.dataset.productId = product.id;
 
         calcularRow(row);
@@ -134,6 +202,7 @@ document.addEventListener('click', function(e){
         e.target.parentElement.innerHTML = '';
 
         addNewRow(); 
+        calcularTotalesgenerales();
     }
 
     if(e.target.classList.contains('delete-row')){
@@ -152,14 +221,23 @@ document.addEventListener('input', function(e){
         }
 
         let results = productsList.filter(p =>
-            p.name.toLowerCase().includes(query)
+            p.nombre.toLowerCase().includes(query)
         );
+
+        if(results.length === 0){
+            container.innerHTML = `
+                <div class="no-results  p-2">
+                    No se encontraron productos
+                </div>
+            `;
+            return;
+        }
 
         let html = '';
         results.forEach(product => {
             html += `
                 <div class="item-product" data-id="${product.id}">
-                    ${product.name}
+                    ${product.nombre}
                 </div>
             `;
         });
@@ -175,9 +253,13 @@ document.addEventListener('input', function(e){
     ){
         let row = e.target.closest('tr');
         calcularRow(row);
+        calcularTotalesgenerales();
     }
 });
 
+document.getElementById('btn-pdf').addEventListener('click', function(){
+    window.open(`/sales/quotationPDF/${quotationId}`, '_blank');
+});
 
 
 document.addEventListener('DOMContentLoaded', async ()=> {

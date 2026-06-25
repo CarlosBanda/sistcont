@@ -22,9 +22,11 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Producto</label>
                                                 <div class="col-sm-9">
-                                                    <select id="type_person" name="tax_regime" class="form-control">
+                                                    <select id="product" class="form-control">
                                                         @foreach($productos as $product)
-                                                            <option id="product" value="{{ $product->id }}">{{ $product->nombre }}</option>
+                                                            <option value="{{ $product->id }}">
+                                                                {{ $product->nombre }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
