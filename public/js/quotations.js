@@ -75,7 +75,7 @@ function calcularRow(row){
      let qty = parseFloat(row.querySelector('.qty').value) || 0;
      let price = parseFloat(row.querySelector('.price').value) || 0;
      let discount = parseFloat(row.querySelector('.discount').value) || 0;
-     let taxRate = parseFloat(row.querySelector('.tax-rate')?.value);
+     let taxRate = parseFloat(row.querySelector('.tax-rate')?.value) || 0;
      
 
      let subtotal = qty * price;
@@ -263,9 +263,54 @@ document.getElementById('btn-pdf').addEventListener('click', function(){
 
 
 document.addEventListener('DOMContentLoaded', async ()=> {
-     loadClients();
-    //  await loadUser();
-     await loadUsers();
-     await loadProducts();
-     // generateFolio();
-})
+
+    console.log("LOCAL STORAGE RAW", localStorage.getItem('viewQuotation'));
+
+    if(document.getElementById('save-quotation')){
+
+        loadClients();
+        await loadUsers();
+        await loadProducts();
+
+        let data = localStorage.getItem('viewQuotation') || localStorage.getItem('duplicateQuotation');
+        console.log("LOCALSTORAGE", data);
+
+        if(data){
+            let quotation = JSON.parse(data);
+            console.log("QUOTATION", quotation);
+
+            document.getElementById('client_id').value = quotation.client_id;
+            document.getElementById('contact_name').value = quotation.contact_name;
+            document.getElementById('quotation_date').value = quotation.quotation_date;
+            document.getElementById('currency').value = quotation.currency;
+            document.getElementById('user_id').value = quotation.user_id;
+
+            let table = document.getElementById('products-table');
+            table.innerHTML = '';
+
+            quotation.items.forEach((item) => {
+                addNewRow();
+
+                let row = table.lastElementChild;
+
+                row.querySelector('.search-product').value = item.product?.nombre || '';
+                row.querySelector('.desc').value = item.product?.modelo || '';
+                row.querySelector('.barcode').value = item.barcode;
+                row.querySelector('.qty').value = item.qty;
+                row.querySelector('.price').value = item.price;
+                row.querySelector('.discount').value = item.discount || 0;
+                let taxValue = parseFloat(item.tax) || 0;
+                row.querySelector('.tax-rate').value = item.tax || 0;
+
+                row.dataset.productId = item.product_id;
+
+                calcularRow(row);
+            });
+
+            calcularTotalesgenerales();
+
+            localStorage.removeItem('viewQuotation');
+            localStorage.removeItem('duplicateQuotation');
+        }
+    }
+});

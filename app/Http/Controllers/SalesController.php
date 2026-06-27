@@ -306,4 +306,11 @@ class SalesController extends Controller
 
         // return $pdf->download('cotizacion_'.$quotation->id.'.pdf');
     }
+
+    public function getQuotation($id){
+        $quotation = Quotation::with(['client','items.product'])
+            ->findOrFail($id);
+
+        return response()->json($quotation);
+    }
 }

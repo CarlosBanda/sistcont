@@ -542,5 +542,58 @@ function recalcularNumeros() {
 }
 
 agregarNuevaFila(false);
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    let data = localStorage.getItem('quotationToSale');
+
+    if(!data) return;
+
+    let quotation = JSON.parse(data);
+    console.log("QUOTATION TO SALE", quotation);
+
+
+    document.getElementById('client_id').value = quotation.client_id;
+    document.getElementById('user_id').value = quotation.user_id;
+    document.getElementById('sale_date').value = quotation.quotation_date;
+
+    let table = document.getElementById('products-table');
+    table.innerHTML = '';
+
+    quotation.items.forEach((item, index) => {
+    // console.log("ITEM",item);
+
+        agregarNuevaFila(false);
+
+        let row = table.rows[index];
+
+        row.querySelector('.product-id').value = item.product_id;
+        row.querySelector('.buscar-producto').value = item.product?.nombre || '';
+        row.querySelector('.description').value = item.product?.modelo || '';
+
+        row.querySelector('.qty').value = item.qty;
+        row.querySelector('.unit-price').value = item.price;
+        row.querySelector('.discount').value = item.discount || 0;
+
+        row.dataset.barcodes = JSON.stringify(
+            Array(item.qty).fill(item.barcode)
+        );
+
+        row.dataset.inventoryIds = JSON.stringify([]);
+        row.dataset.stock = item.qty;
+
+        actualizarCodigos(row);
+
+        let taxValue = parseFloat(item.tax) * 100 || 0;
+        row.querySelector('.tax-rate').value = taxValue;
+
+        calcularFila(row);
+    });
+
+    recalcularTotales();
+
+    localStorage.removeItem('quotationToSale');
+});
+
 </script>
 @endsection
