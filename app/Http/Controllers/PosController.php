@@ -31,8 +31,11 @@ class PosController extends Controller
                 $query->where('modelo', 'like', "%{$texto}%")
                     ->orWhere('nombre', 'like', "%{$texto}%")
                     ->orWhereHas('inventories', function ($inventoryQuery) use ($texto) {
-                        $inventoryQuery->where('codigo_barras', 'like', "%{$texto}%")
-                            ->orWhere('numero_serie', 'like', "%{$texto}%");
+                        $inventoryQuery->where('estatus', 'disponible')
+                            ->where(function ($q) use ($texto) {
+                                $q->where('codigo_barras', 'like', "%{$texto}%")
+                                  ->orWhere('numero_serie', 'like', "%{$texto}%");
+                            });
                     });
             })
             ->limit(10)
