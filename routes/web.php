@@ -42,7 +42,7 @@ Route::get('/register', function() {
 
 Route::get('/', function () {
     return view('template.index');
-});
+})->name('home');
 
 Route::get('/products', function (){
     return view('template.products.index');

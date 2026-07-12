@@ -8689,6 +8689,7 @@
   --breakpoint-xl: 1200px;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --nav-height: 152px;
 }
 
 *,
@@ -24435,7 +24436,7 @@ div.tagsinput span.tag a {
   .sidebar-offcanvas {
     position: fixed;
     max-height: calc(100vh - 4.625rem);
-    top: 4.625rem;
+    top: var(--nav-height);
     bottom: 0;
     overflow: auto;
     right: -236px;
@@ -25115,7 +25116,9 @@ div.tagsinput span.tag a {
     flex-direction: row;
   }
   .navbar .navbar-brand-wrapper {
-    width: 55px;
+    /* width: 55px; */
+        width: auto;
+    padding: 0 10px;
   }
   .navbar .navbar-brand-wrapper .navbar-brand.brand-logo {
     display: none;
@@ -25133,7 +25136,7 @@ div.tagsinput span.tag a {
 
 @media (max-width: 480px) {
   .navbar .navbar-brand-wrapper {
-    width: 55px;
+    width: 55px; 
   }
   .navbar .navbar-brand-wrapper .brand-logo-mini {
     padding-top: 0px;
@@ -25992,4 +25995,23 @@ div.tagsinput span.tag a {
   }
 }
 
+@media (max-width: 991px) {
+  .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-toggler {
+    display: block !important;
+  }
+    /* .sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    z-index: 999;
+    transition: all 0.3s;
+  } */
+
+  body.sidebar-icon-only .sidebar {
+    left: 0;
+  }
+  
+}
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
