@@ -42,7 +42,7 @@ Route::get('/register', function() {
 
 Route::get('/', function () {
     return view('template.index');
-});
+})->name('home');
 
 Route::get('/products', function (){
     return view('template.products.index');
@@ -87,3 +87,7 @@ Route::get('/users', function(){
 
 
 Route::get("/inventory", [InventoryController::class, 'index'])->name('inventario');
+
+Route::get('/sales/quotationPDF/{id}', [SalesController::class, 'generatePDF']);
+
+Route::get('/sales/create-sale', [SalesController::class, 'index'])->name('sales.create');

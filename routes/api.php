@@ -40,6 +40,8 @@ Route::middleware('jwt.auth')->group(function(){
     Route::post('create-provider',[ProviderController::class, 'create']);
     Route::get('users', [AuthController::class, 'getUsers']);
     Route::post('create-users', [AuthController::class, 'create']);
-    Route::get('quotations', [SalesController::class, 'getQuotations']);
+Route::get('quotations', [SalesController::class, 'getQuotations']);
     Route::post('add-product-inventory', [InventoryController::class, 'store']);
+    Route::get('quotation/{id}', [SalesController::class, 'getQuotation']);
+    
 });

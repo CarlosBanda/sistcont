@@ -16,6 +16,7 @@ use App\Models\Sale;
 use App\Models\SaleItem;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SalesController extends Controller
 {
@@ -62,6 +63,8 @@ class SalesController extends Controller
     }
 
     public function create(Request $request){
+        // print_r($request->product_id);
+        // return $request->all();
 
         $userId = $request->user_id;
 
@@ -91,13 +94,18 @@ class SalesController extends Controller
             'contact_name' => $request->contact_name,
             'quotation_date' => $request->quotation_date,
             'folio_id' => $folio->id,
-            'currency' => $request-> currency
+            'currency' => $request->currency,
+            'subtotal' => $request->subtotal,
+            'discount' => $request->discount_total,
+            'tax' => $request->tax_total,
+            'total' => $request->grand_total
         ]);
 
         foreach ($request->products as $item) {
             $quotationItem = QuotationItem::create([
                 'quotation_id' => $quotation->id,
                 'product_id' => $item['product_id'],
+                'barcode' => $item['barcode'],
                 'qty' => $item['qty'],
                 'price' => $item['price'],
                 'discount' => $item['discount'],
@@ -283,5 +291,26 @@ class SalesController extends Controller
         }
 
         return $prefix . '-' . $type . '-' . str_pad($number, 3, '0', STR_PAD_LEFT);
+    }
+
+    public function generatePDF($id){
+        $quotation = Quotation::with([
+            'client',
+            'user',
+            'items.product'
+        ])->findOrFail($id);
+    
+        $pdf = Pdf::loadView('template.sales.quotationPDF', compact('quotation'));
+
+        return $pdf->stream('cotizacion_'.$quotation->id.'.pdf');
+
+        // return $pdf->download('cotizacion_'.$quotation->id.'.pdf');
+    }
+
+    public function getQuotation($id){
+        $quotation = Quotation::with(['client','items.product'])
+            ->findOrFail($id);
+
+        return response()->json($quotation);
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cliente;
 use App\Models\Folio;
+use App\Models\QuotationItem;
 
 class Quotation extends Model
 {
@@ -17,7 +18,11 @@ class Quotation extends Model
         'contact_name',
         'quotation_date',
         'folio_id',
-        'currency'
+        'currency',
+        'subtotal',
+        'discount',
+        'tax',
+        'total'
     ];
 
     public function client(){
@@ -26,5 +31,13 @@ class Quotation extends Model
 
     public function folio(){
         return $this->belongsTo(Folio::class);
+    }
+
+    public function items(){
+        return $this->hasMany(QuotationItem::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::Class);
     }
 }

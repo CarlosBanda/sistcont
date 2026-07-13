@@ -23,6 +23,7 @@
                         <th>Contacto</th>
                         <th>Fecha</th>
                         <th>Moneda</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
 

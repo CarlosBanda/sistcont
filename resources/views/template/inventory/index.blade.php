@@ -22,10 +22,18 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Producto</label>
                                                 <div class="col-sm-9">
+<<<<<<< HEAD
                                                     <select id="product" name="product_id" class="form-control">
                                                         <option value="">Seleccionar producto</option>
                                                         @foreach($productos as $product)
                                                             <option value="{{ $product->id }}">{{ $product->nombre }}</option>
+=======
+                                                    <select id="product" class="form-control">
+                                                        @foreach($productos as $product)
+                                                            <option value="{{ $product->id }}">
+                                                                {{ $product->nombre }}
+                                                            </option>
+>>>>>>> origin/responsivo/solucionado
                                                         @endforeach
                                                     </select>
                                                 </div>

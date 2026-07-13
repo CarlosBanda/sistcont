@@ -33,7 +33,7 @@ class ProductsController extends Controller
 
     public function getProducts(Request $request){
         // $prodcut = Product::all();
-        $products = Product::with('prices')
+        $products = Product::with(['prices','inventories'])
                 ->where('user_id', auth()->id())
                 ->get();
         return response()->json($products);
