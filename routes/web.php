@@ -26,7 +26,7 @@ Route::get('/login', function () {
 })->name('login');
 
 
-Route::get("/clients", [CLientController::class, 'getClients'])->name('clients');
+Route::get('/clients', function () { return view('template.clients.index', ['clientes' => []]); })->name('clients');
 
 /*Route::get('/clients', function (){
     return view('template.clients.index');
