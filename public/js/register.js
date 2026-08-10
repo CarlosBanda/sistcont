@@ -62,6 +62,28 @@ form.addEventListener("submit", async function(e){
      let email = document.getElementById("email").value;
      let password = document.getElementById("password").value;
 
+     // Validar contraseña en el frontend
+     if (password.length < 8) {
+          Swal.fire({ icon: 'warning', title: 'Contraseña muy corta', text: 'La contraseña debe tener al menos 8 caracteres.' });
+          return;
+     }
+     if (!/[A-Z]/.test(password)) {
+          Swal.fire({ icon: 'warning', title: 'Contraseña insegura', text: 'Debe incluir al menos una letra mayúscula.' });
+          return;
+     }
+     if (!/[a-z]/.test(password)) {
+          Swal.fire({ icon: 'warning', title: 'Contraseña insegura', text: 'Debe incluir al menos una letra minúscula.' });
+          return;
+     }
+     if (!/[0-9]/.test(password)) {
+          Swal.fire({ icon: 'warning', title: 'Contraseña insegura', text: 'Debe incluir al menos un número.' });
+          return;
+     }
+     if (!/[@$!%*?&#]/.test(password)) {
+          Swal.fire({ icon: 'warning', title: 'Contraseña insegura', text: 'Debe incluir al menos un carácter especial (@$!%*?&#).' });
+          return;
+     }
+
      let response = await fetch("/api/register",{
      
      method:"POST",
@@ -99,11 +121,19 @@ form.addEventListener("submit", async function(e){
           },1500);
 
      }else{
+          let errorData = await response.json();
+          let errorMsg = 'Error al registrar';
+
+          if (errorData.errors) {
+               errorMsg = Object.values(errorData.errors).flat().join('\n');
+          } else if (errorData.message) {
+               errorMsg = errorData.message;
+          }
 
           Swal.fire({
                icon:'error',
-               title:'Error al registrar'
+               title:'Error al registrar',
+               text: errorMsg
           });
-
      }
 });

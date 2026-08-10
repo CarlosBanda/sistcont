@@ -63,9 +63,10 @@
                                         </div>
 
                                         <div class="input-group password-group">
-                                             <input type="password" id="password" placeholder="Password" required>
+                                             <input type="password" id="password" placeholder="Password" required minlength="8">
                                              <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
                                         </div>
+                                        <small style="color: #888; font-size: 11px;">Mín. 8 caracteres, mayúscula, minúscula, número y especial (@$!%*?&#)</small>
 
                                         <div class="btn-accion">
                                              <button type="button" id="backStep" class="btn-login">

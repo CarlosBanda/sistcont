@@ -12,6 +12,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
+        'company_id',
         'modelo',
         'nombre',
         'unidad_medida_id',
@@ -23,6 +24,11 @@ class Product extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 
     public function prices()
     {

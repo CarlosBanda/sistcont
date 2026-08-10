@@ -48,6 +48,9 @@ form.addEventListener('submit', async function(e){
 
     localStorage.setItem('token', data.token);
 
+    // Guardar también en cookie para que las rutas web lo lean
+    document.cookie = `token=${data.token}; path=/; max-age=${60*60*24}; SameSite=Lax`;
+
     Swal.fire({
       icon:'success',
       title:'Bienvenido',

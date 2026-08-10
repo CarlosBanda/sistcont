@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Provider extends Model
 {
     use HasFactory;
+
     protected $table = 'providers';
+
     protected $fillable = [
+        'company_id',
         'name_comercial',
         'rfc',
         'razon_social',
@@ -22,4 +25,15 @@ class Provider extends Model
         'address',
         'pais'
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

@@ -17,6 +17,7 @@ class Cliente extends Model
         'email',
         'phone',
         'tax_regime',
+        'cfdi_use',
         'zip_code',
         'address',
         'number_ext',
